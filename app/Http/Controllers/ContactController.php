@@ -12,10 +12,20 @@ use Illuminate\Support\Facades\DB;
 
 class ContactController extends Controller
 {
-        public function index()
-        {
-            $number = 0;
-            $items = DB::table('contacts')->select('name','id')->paginate(5);
+        public function index(Request $request)
+    {
+        $number = 0;
+
+        if (isset($request->search)) {
+            $number = 1;
+            $searchoffice = $request->search;
+            $items = Contact::where('name','like','%'.$searchoffice.'%')->select('name','id')->toBase()->get();
+
+
+            return view('contact_views\contact_index', compact('items', 'number'));
+            }
+
+        $items = DB::table('contacts')->select('name', 'id')->paginate(5);
 
             return view('contact_views\contact_index',compact('items','number'));
         }
