@@ -1,5 +1,15 @@
 @extends('layouts.app')
 @section('content')
+   <nav class="navbar navbar-light bg-light justify-content-between">
+        <a class="navbar-brand" href="{{route('contacts.index')}}">Контакты</a>
+        <form class="form-inline" method="POST" action="{{route('contacts.index_search')}}" >
+            @csrf
+            <input id="search" type="search"
+                   class="form-control " name="search"
+                   value="{{ old('search') }}" required autocomplete="search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </nav>
     <h1 style="text-align: center; color: limegreen" >Контакты</h1>
     <div class="container">
         <div class="row justify-content-center">
