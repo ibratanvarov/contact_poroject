@@ -53,7 +53,7 @@
             </div>
 
         </div>
-        @if($items)
+        @if($number == 0)
             <br>
             <div class="row justify-content-center">
                 {{$items->links()}}
